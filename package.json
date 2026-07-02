@@ -1,0 +1,56 @@
+{
+  "name": "boostu-teamleader-mcp",
+  "version": "2.1.0",
+  "description": "BoostU MCP server for Teamleader Focus CRM — contacts, companies, deals, quotations, invoices, products, projects, and more.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "boostu-teamleader-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "prepare": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "mcp",
+    "teamleader",
+    "teamleader-focus",
+    "crm",
+    "model-context-protocol",
+    "ai",
+    "claude",
+    "boostu"
+  ],
+  "author": "BoostU Agency <nick@boostu.be> (https://boostu.be)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boostuagency/boostu-teamleader-mcp.git"
+  },
+  "homepage": "https://github.com/boostuagency/boostu-teamleader-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/boostuagency/boostu-teamleader-mcp/issues"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.5.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.9"
+  }
+}
