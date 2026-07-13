@@ -6,13 +6,13 @@
     "url": "https://github.com/boostuagency/boostu-teamleader-mcp",
     "source": "github"
   },
-  "version": "2.1.2",
+  "version": "2.1.3",
   "packages": [
     {
       "registryType": "npm",
       "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "boostu-teamleader-mcp",
-      "version": "2.1.2",
+      "version": "2.1.3",
       "transport": { "type": "stdio" },
       "environmentVariables": [
         { "name": "TEAMLEADER_CLIENT_ID", "description": "Your Teamleader Focus integration Client ID", "isRequired": true, "isSecret": true },

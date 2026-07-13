@@ -1,6 +1,6 @@
 {
   "name": "boostu-teamleader-mcp",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "mcpName": "io.github.boostuagency/boostu-teamleader-mcp",
   "description": "Open-source MCP server for Teamleader Focus CRM. Use Teamleader inside Claude and other AI assistants: contacts, companies, deals, quotations, invoices, products, projects, and more.",
   "main": "dist/index.js",
