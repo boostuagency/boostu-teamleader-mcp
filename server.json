@@ -1,5 +1,5 @@
 {
-  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-07-09/server.schema.json",
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-10-17/server.schema.json",
   "name": "io.github.boostuagency/boostu-teamleader-mcp",
   "description": "Open-source MCP server for Teamleader Focus CRM. Use Teamleader inside Claude and other AI assistants: contacts, deals, quotations, invoices, projects and more.",
   "repository": {
@@ -9,17 +9,17 @@
   "version": "2.1.1",
   "packages": [
     {
-      "registry_type": "npm",
-      "registry_base_url": "https://registry.npmjs.org",
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
       "identifier": "boostu-teamleader-mcp",
       "version": "2.1.1",
       "transport": { "type": "stdio" },
-      "environment_variables": [
-        { "name": "TEAMLEADER_CLIENT_ID", "description": "Your Teamleader Focus integration Client ID", "is_required": true, "is_secret": true },
-        { "name": "TEAMLEADER_CLIENT_SECRET", "description": "Your Teamleader Focus integration Client Secret", "is_required": true, "is_secret": true },
-        { "name": "TEAMLEADER_REFRESH_TOKEN", "description": "OAuth2 refresh token from the one-time authorization", "is_required": true, "is_secret": true },
-        { "name": "TEAMLEADER_TOKEN_STORE", "description": "Path to persist the rotated refresh token (default .teamleader-token)", "is_required": false, "is_secret": false },
-        { "name": "TEAMLEADER_TOOLS", "description": "Comma-separated tool groups to enable (default: all groups)", "is_required": false, "is_secret": false }
+      "environmentVariables": [
+        { "name": "TEAMLEADER_CLIENT_ID", "description": "Your Teamleader Focus integration Client ID", "isRequired": true, "isSecret": true },
+        { "name": "TEAMLEADER_CLIENT_SECRET", "description": "Your Teamleader Focus integration Client Secret", "isRequired": true, "isSecret": true },
+        { "name": "TEAMLEADER_REFRESH_TOKEN", "description": "OAuth2 refresh token from the one-time authorization", "isRequired": true, "isSecret": true },
+        { "name": "TEAMLEADER_TOKEN_STORE", "description": "Path to persist the rotated refresh token (default .teamleader-token)", "isRequired": false, "isSecret": false },
+        { "name": "TEAMLEADER_TOOLS", "description": "Comma-separated tool groups to enable (default: all groups)", "isRequired": false, "isSecret": false }
       ]
     }
   ]
