@@ -4,21 +4,23 @@ import { TeamleaderAuth } from "./api/auth.js";
 import { TeamleaderClient } from "./api/client.js";
 import { createServer } from "./server.js";
 
-function getRequiredEnv(name: string): string {
+function getEnv(name: string): string {
   const value = process.env[name];
   if (!value) {
-    throw new Error(
-      `Missing required environment variable: ${name}. Please set it in your MCP configuration.`
-    );
+    // Do not throw: the server must still start and answer introspection
+    // (initialize / tools/list) without credentials, so MCP clients and
+    // directories can discover the tools. Tool calls fail with a clear auth
+    // error until the variable is set.
+    console.error(`[teamleader-mcp] ${name} is not set. Configure it before calling tools.`);
   }
-  return value;
+  return value ?? "";
 }
 
 async function main(): Promise<void> {
   const auth = new TeamleaderAuth({
-    clientId: getRequiredEnv("TEAMLEADER_CLIENT_ID"),
-    clientSecret: getRequiredEnv("TEAMLEADER_CLIENT_SECRET"),
-    refreshToken: getRequiredEnv("TEAMLEADER_REFRESH_TOKEN"),
+    clientId: getEnv("TEAMLEADER_CLIENT_ID"),
+    clientSecret: getEnv("TEAMLEADER_CLIENT_SECRET"),
+    refreshToken: getEnv("TEAMLEADER_REFRESH_TOKEN"),
   });
   const client = new TeamleaderClient(auth);
   const server = createServer(client);
