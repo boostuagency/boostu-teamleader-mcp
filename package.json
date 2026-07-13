@@ -1,14 +1,15 @@
 {
   "name": "boostu-teamleader-mcp",
-  "version": "2.1.0",
-  "description": "BoostU MCP server for Teamleader Focus CRM — contacts, companies, deals, quotations, invoices, products, projects, and more.",
+  "version": "2.1.1",
+  "description": "Open-source MCP server for Teamleader Focus CRM. Use Teamleader inside Claude and other AI assistants: contacts, companies, deals, quotations, invoices, products, projects, and more.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "bin": {
     "boostu-teamleader-mcp": "dist/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "NOTICE"
   ],
   "scripts": {
     "build": "tsc",
@@ -26,8 +27,13 @@
     "teamleader-focus",
     "crm",
     "model-context-protocol",
+    "mcp-server",
     "ai",
     "claude",
+    "claude-mcp",
+    "anthropic",
+    "teamleader-api",
+    "crm-integration",
     "boostu"
   ],
   "author": "BoostU Agency <nick@boostu.be> (https://boostu.be)",

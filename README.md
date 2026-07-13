@@ -1,16 +1,19 @@
-# BoostU Teamleader MCP
+# 🔗 BoostU Teamleader MCP
 
-**Give your AI assistant full control over Teamleader Focus CRM.**
+### The open-source Teamleader Focus MCP server. Manage your CRM from Claude and other AI assistants, in plain language. 🤖
 
 [![CI](https://github.com/boostuagency/boostu-teamleader-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/boostuagency/boostu-teamleader-mcp/actions/workflows/ci.yml)
-[![npm](https://img.shields.io/npm/v/boostu-teamleader-mcp.svg)](https://www.npmjs.com/package/boostu-teamleader-mcp)
-[![node >=20](https://img.shields.io/node/v/boostu-teamleader-mcp.svg)](https://nodejs.org)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Made by BoostU](https://img.shields.io/badge/Made%20by-BoostU-blue)](https://boostu.be)
+[![npm version](https://img.shields.io/npm/v/boostu-teamleader-mcp?logo=npm&color=cb3837)](https://www.npmjs.com/package/boostu-teamleader-mcp)
+[![npm downloads](https://img.shields.io/npm/dm/boostu-teamleader-mcp?logo=npm&color=cb3837)](https://www.npmjs.com/package/boostu-teamleader-mcp)
+[![node](https://img.shields.io/node/v/boostu-teamleader-mcp?logo=node.js&color=5FA04E)](https://nodejs.org)
+[![Model Context Protocol](https://img.shields.io/badge/Model_Context_Protocol-server-6C5CE7)](https://modelcontextprotocol.io)
+[![tools](https://img.shields.io/badge/tools-100%2B-2ea44f)](https://www.npmjs.com/package/boostu-teamleader-mcp)
+[![License: MIT](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
+[![Made by BoostU](https://img.shields.io/badge/made_by-BoostU-000)](https://boostu.be)
 
 ---
 
-## What is this?
+## 💡 What is this?
 
 `boostu-teamleader-mcp` is a [Model Context Protocol](https://modelcontextprotocol.io) server that exposes the Teamleader Focus API to AI assistants — including Claude Desktop, Claude Code, Cursor, and Windsurf. It provides over 100 tools spanning the full Teamleader Focus surface: CRM (contacts, companies, deals), sales documents (quotations, invoices, credit notes), product catalog, subscriptions, projects, time tracking, customer-service tickets, and more. Point your AI at it and manage your entire CRM through natural language.
 
@@ -28,60 +31,36 @@
 
 ---
 
-## Table of Contents
+## 🔌 How it works
 
-- [Highlights](#highlights)
-- [Quick Start](#quick-start)
-- [Authentication](#authentication)
-- [Configuration](#configuration)
-- [Available Tools](#available-tools)
-  - [Contacts](#contacts)
-  - [Companies](#companies)
-  - [Deals](#deals)
-  - [Tasks](#tasks)
-  - [Events](#events)
-  - [Invoices](#invoices)
-  - [Quotations](#quotations)
-  - [Products](#products)
-  - [Reference Data](#reference-data)
-  - [Organisation](#organisation)
-  - [Custom Fields](#custom-fields)
-  - [Credit Notes](#credit-notes)
-  - [Subscriptions](#subscriptions)
-  - [Projects](#projects)
-  - [Time Tracking](#time-tracking)
-  - [Activities (Calls & Meetings)](#activities-calls--meetings)
-  - [Tickets](#tickets)
-  - [Tags](#tags)
-  - [Notes](#notes)
-  - [Files](#files)
-  - [Webhooks](#webhooks)
-- [Example Prompts](#example-prompts)
-- [Docker](#docker)
-- [Development](#development)
-- [Architecture](#architecture)
-- [Endpoint Verification](#endpoint-verification)
-- [Contributing](#contributing)
-- [Security](#security)
-- [License](#license)
+```mermaid
+flowchart LR
+    U["🧑 You"] -->|"plain language"| C["🤖 Claude / AI assistant"]
+    C <-->|"MCP · stdio"| S["🔗 boostu-teamleader-mcp"]
+    S <-->|"OAuth2 REST"| T["📇 Teamleader Focus API"]
+```
+
+You ask Claude in plain language. Claude calls this MCP server, which authenticates to Teamleader Focus over OAuth2 and runs the matching API call. Your data stays in Teamleader; this server only brokers the calls.
+
+> Use the outline button at the top-right of this file to jump to any section.
 
 ---
 
-## Highlights
+## ✨ Highlights
 
-- **Full CRM** — create and update contacts, companies, and deals across all pipelines
-- **Quotations and invoicing** — create quotations on deals, book invoices into accounting, send by email, and register payments
-- **Product catalog** — browse products, categories, price lists, and units of measure
-- **Subscriptions** — create, update, and deactivate recurring subscriptions
-- **Projects and time tracking** — manage projects, milestones, log time entries, and start/stop live timers
-- **Customer-service tickets** — open tickets, post replies, and update statuses
-- **Reference-data lookups** — resolve deal phases, pipelines, tax rates, payment terms, lost reasons, and more
-- **OAuth2 with automatic refresh-token rotation** — tokens are refreshed transparently; rotated tokens are persisted to a configurable file
-- **Selectable tool groups** — load only the groups you need via `TEAMLEADER_TOOLS` to keep your assistant's context lean
+- 👥 **Full CRM**: create and update contacts, companies, and deals across all pipelines
+- 🧾 **Quotations and invoicing**: create quotations on deals, book invoices into accounting, send by email, and register payments
+- 📦 **Product catalog**: browse products, categories, price lists, and units of measure
+- 🔁 **Subscriptions**: create, update, and deactivate recurring subscriptions
+- 📊 **Projects and time tracking**: manage projects, milestones, log time entries, and start/stop live timers
+- 🎫 **Customer-service tickets**: open tickets, post replies, and update statuses
+- 🔎 **Reference-data lookups**: resolve deal phases, pipelines, tax rates, payment terms, lost reasons, and more
+- 🔐 **OAuth2 with automatic refresh-token rotation**: tokens are refreshed transparently; rotated tokens are persisted to a configurable file
+- 🧩 **Selectable tool groups**: load only the groups you need via `TEAMLEADER_TOOLS` to keep your assistant's context lean
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
 
 ### Run without installing
 
@@ -178,7 +157,7 @@ Add to `~/.codeium/windsurf/mcp_config.json`:
 
 ---
 
-## Authentication
+## 🔐 Authentication
 
 You need three env vars: `TEAMLEADER_CLIENT_ID`, `TEAMLEADER_CLIENT_SECRET`, and `TEAMLEADER_REFRESH_TOKEN`. Obtain them by registering an integration in the [Teamleader Marketplace / Developer portal](https://marketplace.focus.teamleader.eu) and completing the OAuth2 authorization flow.
 
@@ -188,7 +167,7 @@ For the full step-by-step walkthrough (authorize URL, code exchange, helper scri
 
 ---
 
-## Configuration
+## ⚙️ Configuration
 
 ### Environment variables
 
@@ -236,7 +215,7 @@ Full list of group keys:
 
 ---
 
-## Available Tools
+## 🧰 Available Tools
 
 ### Contacts
 
@@ -434,7 +413,7 @@ Full list of group keys:
 
 ---
 
-## Example Prompts
+## 💬 Example Prompts
 
 ```
 Create a quotation for deal <id> with two line items: 5 hours of consulting at €150/h and a one-time setup fee of €500.
@@ -478,7 +457,7 @@ Show me all open deals with their current phases and tell me which ones haven't 
 
 ---
 
-## Docker
+## 🐳 Docker
 
 ```bash
 docker run --rm \
@@ -492,7 +471,7 @@ docker run --rm \
 
 ---
 
-## Development
+## 🛠️ Development
 
 ```bash
 # Clone and install
@@ -515,36 +494,36 @@ npm run typecheck
 
 ---
 
-## Architecture
+## 🏗️ Architecture
 
 The core of the server is `createServer` in `src/server.ts`, which is transport-agnostic — it takes a `TeamleaderClient` and registers the enabled tool groups, returning a plain `McpServer` instance that the entry point (`src/index.ts`) wires to a `StdioServerTransport`. Tool logic lives in per-domain modules under `src/tools/`, each following a consistent `try / respond / catch / respondError` pattern using shared helpers in `src/lib/`. OAuth2 token acquisition and rotation are handled entirely in `src/api/auth.ts`, transparent to the rest of the codebase. A hosted, multi-tenant edition of this server is available at [teamleader-mcp.boostu.be](https://teamleader-mcp.boostu.be).
 
 ---
 
-## Endpoint Verification
+## ✅ Endpoint Verification
 
 Most read endpoints (`*.list`, `*.info`) have been live-verified against the Teamleader Focus API. Several write and action endpoints (e.g. `subscriptions.create`, `projects.create`, `files.upload`) are implemented from the official documentation but have not been tested against a live account with the relevant module active. If an endpoint name is wrong, the call will fail with a clear HTTP error message rather than silently misbehaving. The full endpoint manifest and verification status are documented in [docs/teamleader-endpoints.md](docs/teamleader-endpoints.md).
 
 ---
 
-## Contributing
+## 🤝 Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup, commit conventions, and instructions on adding new tool groups.
 
 ---
 
-## Security
+## 🔒 Security
 
 Report security vulnerabilities to **nick@boostu.be** — do not open a public issue. See [SECURITY.md](SECURITY.md) for the disclosure policy. Never commit `.env` files or `.teamleader-token` to version control; both are listed in `.gitignore`.
 
 ---
 
-## Disclaimer
+## ⚖️ Disclaimer
 
 This is an independent, community-built integration. It is **not affiliated with, endorsed by, or sponsored by Teamleader NV**. "Teamleader" and "Teamleader Focus" are trademarks of Teamleader NV and are used here only to describe compatibility. You are responsible for your own use of the Teamleader API under Teamleader's terms.
 
 ---
 
-## License
+## 📄 License
 
 MIT License — Copyright (c) 2026 BoostU Agency. See [NOTICE](NOTICE) for upstream attribution.
