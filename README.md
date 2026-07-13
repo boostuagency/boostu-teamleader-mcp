@@ -12,7 +12,7 @@
 
 ## What is this?
 
-`boostu-teamleader-mcp` is a [Model Context Protocol](https://modelcontextprotocol.io) server that exposes the Teamleader Focus API to AI assistants — including Claude Desktop, Claude Code, Cursor, and Windsurf. It provides 89 tools spanning the full Teamleader Focus surface: CRM (contacts, companies, deals), sales documents (quotations, invoices, credit notes), product catalog, subscriptions, projects, time tracking, customer-service tickets, and more. Point your AI at it and manage your entire CRM through natural language.
+`boostu-teamleader-mcp` is a [Model Context Protocol](https://modelcontextprotocol.io) server that exposes the Teamleader Focus API to AI assistants — including Claude Desktop, Claude Code, Cursor, and Windsurf. It provides over 100 tools spanning the full Teamleader Focus surface: CRM (contacts, companies, deals), sales documents (quotations, invoices, credit notes), product catalog, subscriptions, projects, time tracking, customer-service tickets, and more. Point your AI at it and manage your entire CRM through natural language.
 
 > ### Prefer not to self-host?
 > Use the managed, always-on edition at **[teamleader-mcp.boostu.be](https://teamleader-mcp.boostu.be)** — no OAuth setup, magic-link login, and a one-click connector for Claude. Free during the preview, paid plans after.
