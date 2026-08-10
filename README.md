@@ -225,6 +225,9 @@ Full list of group keys:
 | `teamleader_get_contact` | Get detailed information about a specific contact |
 | `teamleader_create_contact` | Create a new contact in Teamleader Focus |
 | `teamleader_update_contact` | Update an existing contact in Teamleader Focus |
+| `teamleader_link_contact_to_company` | Link a contact to a company in Teamleader Focus |
+| `teamleader_unlink_contact_from_company` | Unlink a contact from a company in Teamleader Focus |
+| `teamleader_update_company_link_contact` | Update the link of a contact to a company in Teamleader Focus |
 
 ### Companies
 

@@ -182,4 +182,95 @@ export function registerContactTools(
       };
     }
   );
+  
+  // ── Link Contact to Company ───────────────────────────────────────────────────────
+  server.tool(
+    "teamleader_link_contact_to_company",
+    "Link a contact to a company in Teamleader Focus",
+    {
+      id: z.string().describe("The contact ID to link"),
+      company_id: z.string().describe("The company ID to link"),
+      position: z.string().optional().describe("The position of the contact"),
+      decision_maker: z.boolean().optional().describe("Are they important?"),
+    },
+    async (params) => {
+      const body: Record<string, unknown> = { id: params.id, company_id: params.company_id };
+
+      if (params.position) body.position = params.position;
+      if (params.decision_maker) body.decision_maker = params.decision_maker;
+
+      await client.request({
+        endpoint: "contacts.linkToCompany",
+        body,
+      });
+
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify({ success: true, message: `Contact ${params.id} linked to Company ${params.company_id}` }),
+          },
+        ],
+      };
+    }
+  );
+  
+  // ── Unlink Contact to Company ───────────────────────────────────────────────────────
+  server.tool(
+    "teamleader_unlink_contact_from_company",
+    "Unlink a contact from a company in Teamleader Focus",
+    {
+      id: z.string().describe("The contact ID to unlink"),
+      company_id: z.string().describe("The company ID to unlink"),
+    },
+    async (params) => {
+      const body: Record<string, unknown> = { id: params.id, company_id: params.company_id };
+
+      await client.request({
+        endpoint: "contacts.unlinkFromCompany",
+        body,
+      });
+
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify({ success: true, message: `Contact ${params.id} unlinked from Company ${params.company_id}` }),
+          },
+        ],
+      };
+    }
+  );
+  
+  // ── Update Company Link of Contact ───────────────────────────────────────────────────────
+  server.tool(
+    "teamleader_update_company_link_contact",
+    "Update the link of a contact to a company in Teamleader Focus",
+    {
+      id: z.string().describe("The contact ID to link"),
+      company_id: z.string().describe("The company ID to link"),
+      position: z.string().optional().describe("The position of the contact"),
+      decision_maker: z.boolean().optional().describe("Are they important?"),
+    },
+    async (params) => {
+      const body: Record<string, unknown> = { id: params.id, company_id: params.company_id };
+
+      if (params.position) body.position = params.position;
+      if (params.decision_maker) body.decision_maker = params.decision_maker;
+
+      await client.request({
+        endpoint: "contacts.updateCompanyLink",
+        body,
+      });
+
+      return {
+        content: [
+          {
+            type: "text" as const,
+            text: JSON.stringify({ success: true, message: `Contact ${params.id} link updated to Company ${params.company_id}` }),
+          },
+        ],
+      };
+    }
+  );
 }
