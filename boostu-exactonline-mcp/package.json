@@ -1,0 +1,65 @@
+{
+  "name": "boostu-exactonline-mcp",
+  "version": "1.0.0",
+  "mcpName": "io.github.boostuagency/boostu-exactonline-mcp",
+  "description": "Open-source MCP server for Exact Online. Use your accounting and ERP data in Claude and other AI assistants: relations, sales, purchasing, ledger, banking, VAT and reports.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "boostu-exactonline-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "NOTICE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "lint": "tsc --noEmit",
+    "typecheck": "tsc --noEmit",
+    "prepare": "npm run build",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "keywords": [
+    "mcp",
+    "exact-online",
+    "exactonline",
+    "accounting",
+    "erp",
+    "boekhouding",
+    "model-context-protocol",
+    "mcp-server",
+    "ai",
+    "claude",
+    "claude-mcp",
+    "anthropic",
+    "exact-online-api",
+    "kmo",
+    "boostu"
+  ],
+  "author": "BoostU Agency <nick@boostu.be> (https://boostu.be)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boostuagency/boostu-exactonline-mcp.git"
+  },
+  "homepage": "https://github.com/boostuagency/boostu-exactonline-mcp#readme",
+  "bugs": {
+    "url": "https://github.com/boostuagency/boostu-exactonline-mcp/issues"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.29.0",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^2.1.9"
+  }
+}

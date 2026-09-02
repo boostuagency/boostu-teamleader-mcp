@@ -1,0 +1,29 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.boostuagency/boostu-exactonline-mcp",
+  "description": "MCP server for Exact Online. Use your accounting data in Claude and other AI assistants.",
+  "repository": {
+    "url": "https://github.com/boostuagency/boostu-exactonline-mcp",
+    "source": "github"
+  },
+  "version": "1.0.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "registryBaseUrl": "https://registry.npmjs.org",
+      "identifier": "boostu-exactonline-mcp",
+      "version": "1.0.0",
+      "transport": { "type": "stdio" },
+      "environmentVariables": [
+        { "name": "EXACT_CLIENT_ID", "description": "Client ID of your Exact App Center app", "isRequired": true, "isSecret": true },
+        { "name": "EXACT_CLIENT_SECRET", "description": "Client Secret of your Exact App Center app", "isRequired": true, "isSecret": true },
+        { "name": "EXACT_REFRESH_TOKEN", "description": "OAuth2 refresh token from the one-time authorization", "isRequired": true, "isSecret": true },
+        { "name": "EXACT_REGION", "description": "Exact Online region: be, nl, de, fr, uk, es or com (default be)", "isRequired": false, "isSecret": false },
+        { "name": "EXACT_TOKEN_STORE", "description": "Path to persist the rotated refresh token (default .exact-token)", "isRequired": false, "isSecret": false },
+        { "name": "EXACT_DIVISION", "description": "Pin every call to one division code (default: the user's current division)", "isRequired": false, "isSecret": false },
+        { "name": "EXACT_READ_ONLY", "description": "Set to true to expose read tools only", "isRequired": false, "isSecret": false },
+        { "name": "EXACT_TOOLS", "description": "Comma-separated tool groups to enable (default: all groups)", "isRequired": false, "isSecret": false }
+      ]
+    }
+  ]
+}
