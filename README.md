@@ -278,11 +278,11 @@ Full list of group keys:
 | Tool | Description |
 |------|-------------|
 | `teamleader_quotations_list` | List quotations, optionally filtered by deal id |
-| `teamleader_quotations_info` | Get a single quotation by id |
-| `teamleader_quotations_create` | Create a quotation on a deal, providing one or more line items |
-| `teamleader_quotations_update` | Update a quotation's line items |
+| `teamleader_quotations_info` | Get a single quotation by id, optionally with its expiry (valid-until) settings |
+| `teamleader_quotations_create` | Create a quotation on a deal: line items and/or text, name, valid-until date |
+| `teamleader_quotations_update` | Update a quotation: line items, text, name, or move its valid-until date (expiry) |
 | `teamleader_quotations_accept` | Accept a quotation (marks it accepted — hard to undo) |
-| `teamleader_quotations_send` | Send a quotation by email to the customer |
+| `teamleader_quotations_send` | Email a quotation with your own subject and message (cc, bcc, sender, attachments, language); `#LINK` becomes the signing link |
 
 ### Products
 
@@ -420,6 +420,10 @@ Full list of group keys:
 
 ```
 Create a quotation for deal <id> with two line items: 5 hours of consulting at €150/h and a one-time setup fee of €500.
+```
+
+```
+Move the valid-until date of quotation <id> to the end of next month, then email the customer a reminder in Dutch with the signing link.
 ```
 
 ```
