@@ -11,6 +11,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.2.0] - 2026-09-17
+
+### Added
+
+- `teamleader_quotations_update` can now move a quotation's valid-until date (`expiry_date`) and set `action_after_expiry`, next to changing `text` and `name`. Line items are optional; only the fields you pass change. When you move the date alone, the tool reads the quotation back and keeps its current `action_after_expiry` instead of resetting it.
+- `teamleader_quotations_create` accepts `text`, `name`, `expiry_date` and `action_after_expiry`; a quotation can be text-only.
+- `teamleader_quotations_info` takes `include_expiry` to return the valid-until settings.
+- `teamleader_quotations_send` takes the email body (`content`, with `#LINK` for the signing link), `language`, `recipients_cc`, `recipients_bcc`, a sender (`from_sender_type`, `from_sender_id`, `from_email_address`) and `attachment_file_ids`, so reminders for expiring quotations can be sent straight from the MCP.
+
+### Fixed
+
+- `teamleader_quotations_send` now sends the payload shape `quotations.send` documents (`quotations: [id]`, `recipients.to[].email_address`, `subject`, `content`, `language`). The previous shape used `id` and `email` and left out the required `content` and `language`.
+
+---
+
 ## [2.0.0] - 2026-06-08
 
 ### Added
