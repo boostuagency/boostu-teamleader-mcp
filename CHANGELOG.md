@@ -11,6 +11,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.3.0] - 2026-11-05
+
+### Added
+
+- `teamleader_update_company`: edit a company after it was created (VAT number, company number, addresses, language, price list, preferred currency, marketing consent, IBAN/BIC, responsible user, remarks, tags). Only the fields you pass change.
+- `teamleader_update_contact` takes `marketing_mails_consent` and `price_list_id`.
+- `teamleader_update_deal` takes `contact_person_id` to link a contact person to a deal, and `customer_type` / `customer_id` to change its customer. When only the contact person changes, the current customer is kept.
+
+### Fixed
+
+- `teamleader_quotations_list` with `deal_id` now returns only that deal's quotations. `quotations.list` has no deal filter and ignored it; the tool now reads the deal's quotation ids from `deals.info` and filters on those.
+
+---
+
 ## [2.2.0] - 2026-09-17
 
 ### Added

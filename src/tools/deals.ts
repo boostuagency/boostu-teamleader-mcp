@@ -190,9 +190,37 @@ export function registerDealTools(
         .string()
         .optional()
         .describe("Responsible user ID"),
+      contact_person_id: z
+        .string()
+        .optional()
+        .describe("Contact person to link to the deal (a contact of the customer company)"),
+      customer_type: z
+        .enum(["contact", "company"])
+        .optional()
+        .describe("Change the deal's customer: type (use with customer_id)"),
+      customer_id: z.string().optional().describe("Change the deal's customer: id (use with customer_type)"),
     },
     async (params) => {
       const body: Record<string, unknown> = { id: params.id };
+
+      if (params.contact_person_id || params.customer_id) {
+        // deals.update takes the lead as a whole: keep the current customer when only the contact person changes.
+        let customer = params.customer_id && params.customer_type
+          ? { type: params.customer_type, id: params.customer_id }
+          : undefined;
+        if (!customer) {
+          const info = await client.request<{ data?: { lead?: { customer?: { type: string; id: string } } } }>({
+            endpoint: "deals.info",
+            body: { id: params.id },
+          });
+          customer = info?.data?.lead?.customer as { type: "contact" | "company"; id: string } | undefined;
+          if (!customer) throw new Error(`Deal ${params.id} has no customer; pass customer_type and customer_id`);
+        }
+        body.lead = {
+          customer,
+          ...(params.contact_person_id ? { contact_person_id: params.contact_person_id } : {}),
+        };
+      }
 
       if (params.title) body.title = params.title;
       if (

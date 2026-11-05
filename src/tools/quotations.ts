@@ -51,7 +51,16 @@ export function registerQuotationTools(server: McpServer, client: TeamleaderClie
     async (p) => {
       try {
         const filter: Record<string, unknown> = {};
-        if (p.deal_id) filter.deal_id = p.deal_id;
+        if (p.deal_id) {
+          // quotations.list only filters on ids, so take the deal's quotation ids from deals.info.
+          const deal = await client.request<{ data?: { quotations?: { id: string }[] } }>({
+            endpoint: "deals.info",
+            body: { id: p.deal_id },
+          });
+          const ids = (deal?.data?.quotations ?? []).map((q) => q.id);
+          if (ids.length === 0) return respond({ data: [] });
+          filter.ids = ids;
+        }
         const body = buildListBody({ page: p.page, page_size: p.page_size, filter });
         return respond(await client.request({ endpoint: "quotations.list", body }));
       } catch (e) {

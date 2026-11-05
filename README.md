@@ -236,6 +236,7 @@ Full list of group keys:
 | `teamleader_list_companies` | List companies from Teamleader Focus with optional filtering and pagination |
 | `teamleader_get_company` | Get detailed information about a specific company |
 | `teamleader_create_company` | Create a new company in Teamleader Focus |
+| `teamleader_update_company` | Update a company: name, VAT number, addresses, language, price list, marketing consent and more |
 
 ### Deals
 
