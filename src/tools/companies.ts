@@ -5,6 +5,7 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 import type { TeamleaderClient } from "../api/client.js";
+import { respond, respondError } from "../lib/respond.js";
 import type {
   Company,
   TeamleaderListResponse,
@@ -131,6 +132,66 @@ export function registerCompanyTools(
           },
         ],
       };
+    }
+  );
+
+  // ── Update Company ───────────────────────────────────────────────────────
+  server.tool(
+    "teamleader_update_company",
+    "Update an existing company in Teamleader Focus: name, VAT number, addresses, language, price list, marketing consent and more. Only the fields you pass change.",
+    {
+      id: z.string().describe("The company ID to update"),
+      name: z.string().optional().describe("Company name"),
+      vat_number: z.string().nullable().optional().describe("VAT number, e.g. BE0899623035; null clears it"),
+      national_identification_number: z.string().nullable().optional().describe("Company registration number"),
+      email: z.string().optional().describe("Primary email address (replaces the existing email addresses)"),
+      phone: z.string().optional().describe("Phone number (replaces the existing phone numbers)"),
+      website: z.string().optional().describe("Website URL"),
+      addresses: z
+        .array(
+          z.object({
+            type: z.enum(["primary", "invoicing", "delivery", "visiting"]).default("primary"),
+            line_1: z.string().describe("Street and number"),
+            postal_code: z.string(),
+            city: z.string(),
+            country: z.string().describe("ISO country code, e.g. BE"),
+            addressee: z.string().optional().describe("Optional addressee line"),
+          })
+        )
+        .optional()
+        .describe("Addresses of the company. This replaces all existing addresses, so include the ones to keep."),
+      language: z.string().nullable().optional().describe("Language code (e.g. 'nl', 'fr', 'en')"),
+      price_list_id: z
+        .string()
+        .optional()
+        .describe("Price list (pricing zone) ID; see teamleader_price_lists_list"),
+      preferred_currency: z.string().nullable().optional().describe("Currency code, e.g. EUR"),
+      marketing_mails_consent: z.boolean().optional().describe("Whether the company agreed to receive marketing e-mails"),
+      iban: z.string().nullable().optional(),
+      bic: z.string().nullable().optional(),
+      responsible_user_id: z.string().nullable().optional().describe("Responsible user ID"),
+      remarks: z.string().nullable().optional().describe("Background information (Markdown)"),
+      tags: z.array(z.string()).optional().describe("Tags (overwrites the existing tags)"),
+    },
+    async (params) => {
+      try {
+        const { id, email, phone, addresses, ...rest } = params;
+        const body: Record<string, unknown> = { id };
+        for (const [key, value] of Object.entries(rest)) {
+          if (value !== undefined) body[key] = value;
+        }
+        if (email) body.emails = [{ type: "primary", email }];
+        if (phone) body.telephones = [{ type: "phone", number: phone }];
+        if (addresses) {
+          body.addresses = addresses.map(({ type, ...address }) => ({ type, address }));
+        }
+        if (Object.keys(body).length === 1) return respondError("Pass at least one field to change.");
+
+        await client.request({ endpoint: "companies.update", body });
+        return respond({ success: true, message: `Company ${id} updated`, updated: Object.keys(body).filter((k) => k !== "id") });
+      } catch (e) {
+        return respondError((e as Error).message);
+      }
     }
   );
 }

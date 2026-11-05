@@ -149,9 +149,20 @@ export function registerContactTools(
       language: z.string().optional().describe("Language code"),
       gender: z.enum(["male", "female"]).optional().describe("Gender"),
       tags: z.array(z.string()).optional().describe("Tags to assign"),
+      marketing_mails_consent: z
+        .boolean()
+        .optional()
+        .describe("Whether the contact agreed to receive marketing e-mails"),
+      price_list_id: z
+        .string()
+        .nullable()
+        .optional()
+        .describe("Price list ID (see teamleader_price_lists_list); null removes the price list"),
     },
     async (params) => {
       const body: Record<string, unknown> = { id: params.id };
+      if (params.marketing_mails_consent !== undefined) body.marketing_mails_consent = params.marketing_mails_consent;
+      if (params.price_list_id !== undefined) body.price_list_id = params.price_list_id;
 
       if (params.first_name) body.first_name = params.first_name;
       if (params.last_name) body.last_name = params.last_name;
